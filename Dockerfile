@@ -7,8 +7,8 @@ RUN apt-get update && \
     mkdir /var/run/sshd
 
 RUN sed -i 's/\#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
-RUN useradd foo -m -s /bin/bash && echo 'foo:foo' | chpasswd
-RUN mkdir /home/foo/.ssh && chown foo:foo /home/foo/.ssh && chmod go-rwx /home/foo/.ssh
+RUN sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config
+RUN useradd foo -m -s /bin/bash && mkdir /home/foo/.ssh && chown foo:foo /home/foo/.ssh && chmod go-rwx /home/foo/.ssh
 
 EXPOSE 22
 CMD ["/usr/sbin/sshd","-D"]
