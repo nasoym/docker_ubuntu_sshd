@@ -10,5 +10,5 @@ RUN sed -i 's/\#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/
 RUN useradd foo -m -s /bin/bash && echo 'foo:foo' | chpasswd
 
 EXPOSE 22
-CMD ["/usr/sbin/sshd -D"]
+CMD ["/usr/sbin/sshd","-D"]
 
