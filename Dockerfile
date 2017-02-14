@@ -11,7 +11,7 @@ RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/s
 # SSH login fix. Otherwise user is kicked off after login
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 
-RUN useradd foo && echo 'foo:foo' | chpasswd && mkdir -p /home/foo && chown foo:foo /home/foo
+RUN useradd foo -m -s /bin/bash && echo 'foo:foo' | chpasswd
 
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
