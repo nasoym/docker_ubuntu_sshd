@@ -8,6 +8,8 @@ RUN apt-get update && \
     dpkg-reconfigure openssh-server
 
 RUN sed -i 's/\#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+RUN sed -i 's/^AcceptEnv.*$/AcceptEnv */' /etc/ssh/sshd_config
+
 RUN groupadd -r -g 500 foo
 RUN useradd foo -m -u 500 -g 500 -s /bin/bash && mkdir /home/foo/.ssh && chown foo:foo /home/foo/.ssh && chmod go-rwx /home/foo/.ssh
 
