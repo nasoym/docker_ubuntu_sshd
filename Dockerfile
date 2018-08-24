@@ -4,7 +4,8 @@ MAINTAINER Sinan Goo
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y openssh-server && \
-    mkdir /var/run/sshd
+    mkdir /var/run/sshd && \
+    dpkg-reconfigure openssh-server
 
 RUN sed -i 's/\#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
 RUN groupadd -r -g 500 foo
